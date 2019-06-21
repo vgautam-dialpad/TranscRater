@@ -14,7 +14,8 @@ import json
 
 
 # include the commands directories
-BINDIR = "/home/jalalvand/Desktop/TranscRater"
+BINDIR = "/home/vasundhara/test/TranscRater/TranscRater"
+sys.path.insert(0, BINDIR)
 sys.path.insert(0, BINDIR+"/bin")
 sys.path.insert(0, BINDIR+"/ExFt_bin")
 sys.path.insert(0, BINDIR+"/REG-QE")
