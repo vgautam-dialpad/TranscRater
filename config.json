@@ -1,9 +1,12 @@
 {
 
-"BASEDIR" : "/home/jalalvand/Desktop/TranscRater",
-"BINDIR" : "/home/jalalvand/Desktop/TranscRater",
+"BASEDIR" : "/home/vasundhara/test/TranscRater/TranscRater",
+"BINDIR" : "/home/vasundhara/test/TranscRater/TranscRater",
 
-"RANKLIBDIR" : "/home/jalalvand/Downloads",  
+"RNNLMDIR" : "/home/vasundhara/test/TranscRater/rnnlm-0.3e",
+"SRILMDIR" : "/home/vasundhara/test/TranscRater/srilm-1.7.2",
+"TREETAGDIR" : "/home/vasundhara/test/TranscRater/tree-tagger-linux-3.2",
+"RANKLIBDIR" : "/usr/local/bin",
 
 "CHANNELS" : "5",
 
