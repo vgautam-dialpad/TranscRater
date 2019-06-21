@@ -28,17 +28,29 @@ import numpy as np
 
 from __main__ import config
 
+class RandintWrapper:
+  
+  def __init__(self, min, max):
+    self.rand_int = sp_randint(min, max)
+
+  def rvs(self, random_state=None):
+    candidate = self.rand_int.rvs(random_state=random_state)
+    if candidate == 1:
+        return 1.0
+    else:
+        return candidate
+
 def main(train_label, train_feat, modelsdir, selfeat):
 
   X_train = np.nan_to_num(np.genfromtxt(train_feat, delimiter=' '))
   y_train = np.nan_to_num(np.genfromtxt(train_label, delimiter=' '))
 
+
   X_trains = X_train
   scaler = StandardScaler().fit(X_train)
   X_trains = scaler.transform(X_train)
 
-
-    # performs feature selection
+  # performs feature selection
   featsel_str = ".all-feats"
   if int(selfeat):
     print "Performing feature selection ..."
@@ -46,10 +58,11 @@ def main(train_label, train_feat, modelsdir, selfeat):
     sel_est = RandomizedLasso(alpha="bic", verbose=True, max_iter=1000,
                               n_jobs=int(config['n_jobs']), random_state=42,
                               n_resampling=1000)
-  
+ 
     sel_est.fit(X_trains, y_train)
+
     X_trains = sel_est.transform(X_trains)
-  
+
     selected_mask = sel_est.get_support()
     selected_features = sel_est.get_support(indices=True)
   
@@ -70,12 +83,11 @@ def main(train_label, train_feat, modelsdir, selfeat):
   # performs parameter optimization using random search
   print "Performing parameter optimization ... "
 
-
   param_distributions = \
     {"n_estimators": [5, 10, 50, 100, 200, 500],
      "max_depth": [3, 2, 1, None],
-     "max_features": ["auto", "sqrt", "log2", int(X_trains.shape[1]/2.0)],
-     "min_samples_split": sp_randint(1, 11),
+     "max_features": ["auto", "sqrt", "log2", max(int(X_trains.shape[1]/2.0), 1)],
+     "min_samples_split": RandintWrapper(1, 11),
      "min_samples_leaf": sp_randint(1, 11),
      "bootstrap": [True, False]}
    # "criterion": ["gini", "entropy"]}
