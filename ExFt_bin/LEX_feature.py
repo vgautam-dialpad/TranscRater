@@ -58,6 +58,12 @@ def main(setname, words_file):
           f.write("%.4f " % elem)
         f.write("\n")
         SUM = np.empty((0, featsize), float)
+      else:
+        zero = 0.0
+        for elem in range(featsize):
+          f.write("%.4f " % zero)
+        f.write("\n")
+        SUM = np.empty((0, featsize), float)
     else:  
       if ( w2f.get(w) ):
         SUM = np.vstack( [ SUM, w2f.get(w) ] )
