@@ -1,0 +1,7 @@
+**/results/
+**/temp/
+**/MLR_models/
+**/RR_models/
+**/*.data
+egs/CHiME3/data/features/
+*.pyc
